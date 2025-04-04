@@ -14,6 +14,6 @@ addict
 termcolor
 shapely
 datasets
-modelscope
+modelscope[framework]
 matplotlib
 dashscope
