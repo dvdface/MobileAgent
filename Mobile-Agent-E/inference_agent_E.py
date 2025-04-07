@@ -35,9 +35,12 @@ os.environ["TOKENIZERS_PARALLELISM"] = "false"
 ADB_PATH = os.environ.get("ADB_PATH", default="adb")
 
 ## Reasoning model configs
-BACKBONE_TYPE = os.environ.get("BACKBONE_TYPE", default="OpenAI") # "OpenAI" or "Gemini" or "Claude"
-assert BACKBONE_TYPE in ["OpenAI", "Gemini", "Claude"], "Unknown BACKBONE_TYPE"
+BACKBONE_TYPE = os.environ.get("BACKBONE_TYPE", default="Qwen") # "Qwen" or "OpenAI" or "Gemini" or "Claude"
+assert BACKBONE_TYPE in ["Qwen", "OpenAI", "Gemini", "Claude"], "Unknown BACKBONE_TYPE"
 print("### Using BACKBONE_TYPE:", BACKBONE_TYPE)
+
+QWEN_API_URL = "https://dashscope.aliyuncs.com/compatible-mode/v1/chat/completions"
+QWEN_API_KEY = os.environ.get("QWEN_API_KEY", default=None)
 
 OPENAI_API_URL = "https://api.openai.com/v1/chat/completions"
 OPENAI_API_KEY = os.environ.get("OPENAI_API_KEY", default=None)
@@ -48,7 +51,10 @@ GEMINI_API_KEY = os.environ.get("GEMINI_API_KEY", default=None)
 CLAUDE_API_URL = "https://api.anthropic.com/v1/messages"
 CLAUDE_API_KEY = os.environ.get("CLAUDE_API_KEY", default=None)
 
-if BACKBONE_TYPE == "OpenAI":
+if BACKBONE_TYPE == "Qwen":
+    REASONING_MODEL = "qwen2.5-72b-instruct"
+    KNOWLEDGE_REFLECTION_MODEL = "qwen2.5-72b-instruct"
+elif BACKBONE_TYPE == "OpenAI":
     REASONING_MODEL = "gpt-4o-2024-11-20"
     KNOWLEDGE_REFLECTION_MODEL = "gpt-4o-2024-11-20"
 elif BACKBONE_TYPE == "Gemini":
@@ -379,7 +385,9 @@ def get_reasoning_model_api_response(chat, model_type=BACKBONE_TYPE, model=None,
     
     # chat messages in openai format
     model = REASONING_MODEL if model is None else model
-    if model_type == "OpenAI":
+    if model_type == "Qwen":
+        return inference_chat(chat, model, QWEN_API_URL, QWEN_API_KEY, usage_tracking_jsonl=USAGE_TRACKING_JSONL, temperature=temperature)
+    elif model_type == "OpenAI":
         return inference_chat(chat, model, OPENAI_API_URL, OPENAI_API_KEY, usage_tracking_jsonl=USAGE_TRACKING_JSONL, temperature=temperature)
     elif model_type == "Gemini":
         return inference_chat(chat, model, GEMINI_API_URL, GEMINI_API_KEY, usage_tracking_jsonl=USAGE_TRACKING_JSONL, temperature=temperature)
