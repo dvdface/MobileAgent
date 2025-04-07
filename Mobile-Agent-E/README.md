@@ -113,6 +113,7 @@ Please refer to the `# Edit your Setting #` section in `inference_agent_E.py` fo
 The agent can be run in both `individual` (performing a standalone task) or `evolution` (performing a sequence of tasks with evolution) settings. We provide example shell scripts as follows:
 
 - Run on a standalone task:
+  
   On Linux:
     ```
     bash scripts/run_task.sh
@@ -122,6 +123,7 @@ The agent can be run in both `individual` (performing a standalone task) or `evo
     bash scripts/run_task.bat
     ```
 - Run on a sequence of tasks with self-evolution. This script loads in an toy example json file from `data/custom_tasks_example.json`.
+
   On Linux:
     ```
     bash scripts/run_tasks_evolution.sh
