@@ -80,7 +80,11 @@ Please refer to the `# Edit your Setting #` section in `inference_agent_E.py` fo
     ```
     export ADB_PATH="your/path/to/adb"
     ```
-2. Backbone model and API keys: you can choose from OpenAI, Gemini, and Claude; Set the corresponding keys as follows:
+2. Backbone model and API keys: you can choose from Qwen, OpenAI, Gemini, and Claude; Set the corresponding keys as follows:
+    ```
+    export BACKBONE_TYPE="Qwen"
+    export QWEN_API_KEY="your-qwen-key"
+    ```
     ```
     export BACKBONE_TYPE="OpenAI"
     export OPENAI_API_KEY="your-openai-key"
@@ -93,7 +97,7 @@ Please refer to the `# Edit your Setting #` section in `inference_agent_E.py` fo
     export BACKBONE_TYPE="Claude"
     export CLAUDE_API_KEY="your-claude-key"
     ```
-3. Perceptor: By default, the icon captioning model (`CAPTION_MODEL`) in Perceptor uses "qwen-vl-plus" from Qwen API:
+4. Perceptor: By default, the icon captioning model (`CAPTION_MODEL`) in Perceptor uses "qwen-vl-plus" from Qwen API:
     - Follow this to get an [Qwen API Key](https://help.aliyun.com/document_detail/2712195.html?spm=a2c4g.2712569.0.0.5d9e730aymB3jH) 
     - Set the Qwen API key:
         ```
@@ -102,22 +106,30 @@ Please refer to the `# Edit your Setting #` section in `inference_agent_E.py` fo
     - You can set the `CAPTION_MODEL` in `inference_agent_E.py` to "qwen-vl-max" for a better perception performance but with higher pricing.
     - If you machine is equipped with a high-performance GPU, you can also choose to host the icon captioning model locally: (1) set the `CAPTION_CALL_METHOD` to "local"; (2) set `CAPTION_MODEL` to 'qwen-vl-chat' or 'qwen-vl-chat-int4' depending on the GPU spec.
 
-4. Customize initial Tips: You can tailor the tips for the agent to suit your specific device and needs. To do so, modify the `INIT_TIPS` in `inference_agent_E.py`. An example of customized tips for Chinese apps such as Xiaohongshu and Taobao are provided in `data/custom_tips_example_for_cn_apps.txt`.
+5. Customize initial Tips: You can tailor the tips for the agent to suit your specific device and needs. To do so, modify the `INIT_TIPS` in `inference_agent_E.py`. An example of customized tips for Chinese apps such as Xiaohongshu and Taobao are provided in `data/custom_tips_example_for_cn_apps.txt`.
 
 ## 🚀 Quick Start
 
 The agent can be run in both `individual` (performing a standalone task) or `evolution` (performing a sequence of tasks with evolution) settings. We provide example shell scripts as follows:
 
 - Run on a standalone task:
+  On Linux:
     ```
     bash scripts/run_task.sh
     ```
-
+  On Windows:
+    ```
+    bash scripts/run_task.bat
+    ```
 - Run on a sequence of tasks with self-evolution. This script loads in an toy example json file from `data/custom_tasks_example.json`.
+  On Linux:
     ```
     bash scripts/run_tasks_evolution.sh
     ```
-
+  On Windows:
+    ```
+    bash scripts/run_tasks_evolution.bat
+    ```
 ## 🤗 Mobile-Eval-E Benchmark
 The proposed Mobile-Eval-E benchmark can be found in `data/Mobile-Eval-E` and also on [Huggingface Datasets](https://huggingface.co/datasets/mikewang/mobile_eval_e).
 
