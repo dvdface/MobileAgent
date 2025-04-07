@@ -120,7 +120,7 @@ The agent can be run in both `individual` (performing a standalone task) or `evo
     ```
   On Windows:
     ```
-    bash scripts/run_task.bat
+    scripts/run_task.bat
     ```
 - Run on a sequence of tasks with self-evolution. This script loads in an toy example json file from `data/custom_tasks_example.json`.
 
@@ -130,7 +130,7 @@ The agent can be run in both `individual` (performing a standalone task) or `evo
     ```
   On Windows:
     ```
-    bash scripts/run_tasks_evolution.bat
+    scripts/run_tasks_evolution.bat
     ```
 ## 🤗 Mobile-Eval-E Benchmark
 The proposed Mobile-Eval-E benchmark can be found in `data/Mobile-Eval-E` and also on [Huggingface Datasets](https://huggingface.co/datasets/mikewang/mobile_eval_e).
